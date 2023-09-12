@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+/* Mapping the JPA repository with Employee to access
+ different functionality related to mapped database*/
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 }
