@@ -64,5 +64,10 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 - Also have experience in Writing test with Junit and Mockito and swagger documentation
 - Has some experience with Android development 
 - Also have experience in GRPC Java
+- Has experience in build multi-stage docker image for spring boot application 
+- Has experience in Write Jenkins Jobs and Script to test automation and deployment
+- Has Experience in deploy the java spring boot application into AWS Cloud and GCP Cloud Service
+- Has Experience Cache and Scheduler and Threading with java and Spring boot 
+- Experience in ERP application build with Java
 
 
