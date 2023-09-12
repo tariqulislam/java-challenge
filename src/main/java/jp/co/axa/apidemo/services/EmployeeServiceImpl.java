@@ -14,8 +14,8 @@ import java.util.Optional;
 
 /*
 * Employee Related Business logic for repository
-* Cached Repository form service
-* Handle all repository logic
+* Cached Database to this service
+* Handle most of the repository logic for Employee
  */
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
