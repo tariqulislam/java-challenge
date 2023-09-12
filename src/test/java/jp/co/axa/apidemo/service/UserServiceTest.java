@@ -5,13 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import jp.co.axa.apidemo.entities.User;
 import jp.co.axa.apidemo.repositories.UserRepository;
 import jp.co.axa.apidemo.services.UserService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public class UserServiceTest {
 
     @Autowired
@@ -20,8 +22,8 @@ public class UserServiceTest {
     @Autowired
     private UserRepository userRepository;
     @Test
-    @DisplayName(value = "User Should Find By Email")
-    void  userShouldFindByEmail() {
+
+    public void  userShouldFindByEmail() {
         userRepository.deleteAll();
         User expectedUser = new User();
         expectedUser.setEmail("tariqul@gmail.com");

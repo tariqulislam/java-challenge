@@ -3,9 +3,9 @@ package jp.co.axa.apidemo.repository;
 
 import jp.co.axa.apidemo.entities.Employee;
 import jp.co.axa.apidemo.repositories.EmployeeRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
@@ -13,23 +13,25 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
-@ExtendWith(SpringExtension.class)
+
 @DataJpaTest
 @AutoConfigureBefore(CacheAutoConfiguration.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration
 @WebAppConfiguration
+@RunWith(SpringRunner.class)
 public class EmployeeRepositoryTest {
     @Autowired
     private EmployeeRepository employeeRepository;
 
     @Test
-    @DisplayName("employee list test")
-    void shouldHaveEmployees() {
+
+   public void shouldHaveEmployees() {
         employeeRepository.deleteAll();
         Employee emp = new Employee();
         emp.setSalary(1000);
@@ -54,8 +56,8 @@ public class EmployeeRepositoryTest {
     }
 
     @Test
-    @DisplayName("employee will be updated")
-    void shouldEmployeeUpdate() {
+
+    public  void shouldEmployeeUpdate() {
         employeeRepository.deleteAll();
         Employee emp = new Employee();
         emp.setSalary(1000);
@@ -77,8 +79,7 @@ public class EmployeeRepositoryTest {
     }
 
     @Test
-    @DisplayName("Should Employee Will Delete")
-    void shouldDeleteEmployee() {
+    public void shouldDeleteEmployee() {
         employeeRepository.deleteAll();
         Employee emp = new Employee();
         emp.setSalary(1000);

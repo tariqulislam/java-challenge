@@ -3,9 +3,9 @@ package jp.co.axa.apidemo.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import jp.co.axa.apidemo.entities.User;
 import jp.co.axa.apidemo.repositories.UserRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Test;
+
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
@@ -16,22 +16,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 
-@ExtendWith(SpringExtension.class)
+
 @DataJpaTest
 @AutoConfigureBefore(CacheAutoConfiguration.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration
 @WebAppConfiguration
-class UserRepositoryTest {
+@RunWith(SpringRunner.class)
+public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
     @Test
-    @DisplayName(value = "User Registration Test")
-    void shouldUserCanRegister() {
+    public void shouldUserCanRegister() {
         User expectedUser = new User();
         expectedUser.setEmail("tariqul@eeeee.com");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -45,8 +46,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    @DisplayName(value = "User Find Test")
-    void shouldUserCanFindByEmail() {
+   public void shouldUserCanFindByEmail() {
         User expectedUser = new User();
         expectedUser.setEmail("tariqul@eeeee.com");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

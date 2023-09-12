@@ -5,15 +5,17 @@ import jp.co.axa.apidemo.entities.Employee;
 import jp.co.axa.apidemo.repositories.EmployeeRepository;
 import jp.co.axa.apidemo.services.EmployeeService;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@ExtendWith(SpringExtension.class)
+
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public class EmployeeServiceTest {
 
     @Autowired
@@ -21,7 +23,7 @@ public class EmployeeServiceTest {
     @Autowired
     public EmployeeService employeeService;
     @Test
-    void getEmployeeByTesting() {
+    public void getEmployeeByTesting() {
         System.out.println("Should employee Save");
         Employee emp = new Employee();
         emp.setSalary(1000);
@@ -38,7 +40,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void  shouldEmployeeSavedIntoDatabaseByService() {
+    public void  shouldEmployeeSavedIntoDatabaseByService() {
         System.out.println("Employee Should Saved by Service");
         Employee emp = new Employee();
         emp.setSalary(1000);
@@ -53,7 +55,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void  shouldEmployeeDelete() {
+    public void  shouldEmployeeDelete() {
         System.out.println("Employee Should Saved by Service");
         Employee emp = new Employee();
         emp.setSalary(1000);
@@ -68,7 +70,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void  shouldEmployeeModified() {
+    public void  shouldEmployeeModified() {
         System.out.println("Employee Should Saved by Service");
         Employee emp = new Employee();
         emp.setSalary(1000);
