@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/* Rest api Controller for Employee */
 @RestController
 @RequestMapping("/api/v1")
 public class EmployeeController {
@@ -27,11 +28,23 @@ public class EmployeeController {
     @Autowired
     CacheServiceCheckService cacheServiceCheckService;
 
+    /* Api end point for check the employee cache by name
+    using cache manager from CacheServiceCheckService
+     Need Access token  to access this api endpoint */
     @GetMapping("/employees/cache/{name}")
+    @ApiImplicitParam(name = "Authorization",
+            value = "Access Token",
+            required = true,
+            allowEmptyValue = false,
+            paramType = "header",
+            dataTypeClass = String.class,
+            example = "Bearer access_token")
     public Cache getEmployeeCacheDetails(@PathVariable("name")String name) {
         return cacheServiceCheckService.getCacheByName(name);
     }
 
+    /* Api Endpoint for access the employee list information
+    * Need Access token for access api endpoint */
     @GetMapping("/employees")
     @ApiImplicitParam(name = "Authorization",
             value = "Access Token",
@@ -41,10 +54,10 @@ public class EmployeeController {
             dataTypeClass = String.class,
             example = "Bearer access_token")
     public List<Employee> getEmployees() {
-        List<Employee> employees = employeeService.retrieveEmployees();
-        return employees;
+        return employeeService.retrieveEmployees();
     }
-
+    /* API endpoint for access the single employee information
+    * Need Access token to access */
     @GetMapping("/employees/{employeeId}")
     @ApiImplicitParam(name = "Authorization",
             value = "Access Token",
@@ -57,6 +70,8 @@ public class EmployeeController {
         return employeeService.getEmployee(employeeId);
     }
 
+    /* API endpoint for save the employee information
+    * Access Token is Required */
     @PostMapping("/employees")
     @ApiImplicitParam(name = "Authorization",
             value = "Access Token",
@@ -66,15 +81,17 @@ public class EmployeeController {
             dataTypeClass = String.class,
             example = "Bearer access_token")
     public ResponseEntity<?> saveEmployee(@RequestBody @Valid EmployeeRequest employeeRequest){
-        HashMap<String, Object> map = new HashMap<>();
         Employee updateEmp = null;
+        /* Using for create the entity response for api */
         EmployeeResponse employeeResponse = new EmployeeResponse();
         try {
+            /* create the employee object and employeeService to save the employee into database by service */
            Employee  savedEmployee = new Employee();
            savedEmployee.setName(employeeRequest.getName());
            savedEmployee.setDepartment(employeeRequest.getDepartment());
            savedEmployee.setSalary(employeeRequest.getSalary());
            updateEmp = employeeService.saveEmployee(savedEmployee);
+
            employeeResponse.setStatus("success");
            employeeResponse.setMsg("Employee Saved Successfully");
            employeeResponse.setEmployee(updateEmp);
@@ -88,6 +105,7 @@ public class EmployeeController {
 
     }
 
+    /* API endpoint for delete the employee  and need access token */
     @DeleteMapping("/employees/{employeeId}")
     @ApiImplicitParam(name = "Authorization",
             value = "Access Token",
@@ -97,10 +115,12 @@ public class EmployeeController {
             dataTypeClass = String.class,
             example = "Bearer access_token")
     public ResponseEntity<?> deleteEmployee(@PathVariable(name="employeeId") Long employeeId){
+        /* Find the existing employee from database by employee service */
         Employee findEmp = employeeService.getEmployee(employeeId);
         HashMap<String, String> map = new HashMap<>();
         EmployeeResponse employeeResponse = new EmployeeResponse();
         if(findEmp != null) {
+            /* Run the delete operation by employee service delete method */
             boolean isDeleteEmp =  employeeService.deleteEmployee(employeeId);
             if (isDeleteEmp) {
                 employeeResponse.setStatus("success");
@@ -119,7 +139,7 @@ public class EmployeeController {
         }
         return ResponseEntity.ok().body(employeeResponse);
     }
-
+    /* API endpoint for  update existing employee. Access token is required */
     @PutMapping("/employees/{employeeId}")
     @ApiImplicitParam(name = "Authorization",
             value = "Access Token",
@@ -130,9 +150,11 @@ public class EmployeeController {
             example = "Bearer access_token")
     public ResponseEntity<?> updateEmployee(@RequestBody Employee employee,
                                @PathVariable(name="employeeId")Long employeeId){
+        /* Find the existing employee by employee service */
         Employee emp = employeeService.getEmployee(employeeId);
         EmployeeResponse employeeResponse = new EmployeeResponse();
         if(emp != null){
+            /* update the employee by employee service update method */
            boolean isUpdateEmp = employeeService.updateEmployee(employee);
            if(isUpdateEmp) {
                employeeResponse.setStatus("success");
