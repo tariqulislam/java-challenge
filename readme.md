@@ -30,13 +30,17 @@ Application (with the embedded H2 database) is ready to be used ! You can access
 - Edit readme.md and add any comments. It can be about what you did, what you would have done if you had more time, etc.
 - Send us the link of your repository.
 
-### Add the Authentication with Json token in file
+### JWT token related Notes for authentication 
  - Add the config package 
  - Add the Json token generation as Jwt token
  - Add the helpers package (which contains response and request helper)
  - You need to json token by Register and login from /auth/register and /auth/login
  - To make request to Employee Controller you have get provide Header "Authorization: Bearer <access token>"
  - All the Test are in Test folder
+
+### Database Related Notes
+ - Using the different database for Main application and Test
+ - Please see on Resources for both main and test package
 
 #### Restrictions
 - use java 8
