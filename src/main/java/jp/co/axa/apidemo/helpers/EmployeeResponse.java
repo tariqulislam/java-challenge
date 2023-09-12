@@ -2,14 +2,17 @@ package jp.co.axa.apidemo.helpers;
 
 import io.swagger.models.auth.In;
 import jp.co.axa.apidemo.entities.Employee;
-
+/*
+Using for handling the Employee Response Entity for employee controller
+All using for handling the mockMVC test request and serialization
+ */
 public class EmployeeResponse {
     private String status;
     private  String msg;
 
     public EmployeeResponse() {
     }
-
+    /*  Constructor for handling for status and message only */
     public EmployeeResponse(String status, String msg) {
         this.status = status;
         this.msg = msg;

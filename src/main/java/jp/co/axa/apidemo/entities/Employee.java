@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+// Entity is using for Handling the Employee Repository and Controller
 @Entity
 @Table(name="EMPLOYEE")
 public class Employee {

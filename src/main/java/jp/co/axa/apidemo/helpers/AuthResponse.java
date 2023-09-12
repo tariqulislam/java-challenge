@@ -1,5 +1,8 @@
 package jp.co.axa.apidemo.helpers;
 
+/* Using for Handling the Response for Auth Request
+ Also use for normalize the Response
+ Using for serialize the Test Object return by mock MVC */
 public class AuthResponse {
     private String email;
     private String accessToken;

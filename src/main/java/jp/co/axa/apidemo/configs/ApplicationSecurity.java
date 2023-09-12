@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
 
+/* Handling the Application Web Security
+*  Using for protected the Access to api endpoint */
 @EnableWebSecurity(debug = true)
 public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
@@ -26,12 +28,17 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtTokenFilter jwtTokenFilter;
 
+    /* Override the spring core user details authentication  and thor the error  like aop during try to login
+    * into server */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(username -> userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User" + username + " not found.")));
     }
 
+    /* Handle the HttpSecurity  to disable and enable the permission to different api endpoint
+    *  Introduce the Access token handling  and behavior
+    *  Declare the authorize Requests Protection for different assets and endpoint*/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -57,10 +64,14 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
+    /* Using the BCryptPasswordEncoder as password encoder for application and load as bean*/
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    /* Initial the authentication manager and load as bean using  this bean in run time
+       Handling the authentication process
+     */
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {

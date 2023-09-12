@@ -5,6 +5,10 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 
+/*
+Using for handling the Employee Request for employee controller
+All using for handling the mockMVC test request and serialization
+ */
 public class EmployeeRequest {
     public EmployeeRequest(String name, Integer salary, String department) {
         this.name = name;

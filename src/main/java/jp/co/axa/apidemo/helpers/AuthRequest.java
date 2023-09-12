@@ -3,6 +3,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
+/* Create the handling the user authentication request
+Using for provide as Request body for User Rest Controller and methods */
 public class AuthRequest {
 
     @NotNull @Email @Length(min = 5, max = 50)
