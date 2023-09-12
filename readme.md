@@ -63,4 +63,8 @@ Please let us know more about your Java experience in a few sentences. For examp
 - I am also knows the reactive programming with Java and Spring boot  
 - I know Spring Boot very well and have been using it for many years
 - Also Have experience in micro-service build with Spring boot and Java
+- Also have experience in Writing test with Junit and Mockito and swagger documentation
+- Has some experience with Android development 
+- Also have experience in GRPC Java
+
 
