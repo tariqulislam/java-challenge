@@ -1,6 +1,5 @@
 package jp.co.axa.apidemo.controller;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
@@ -8,14 +7,11 @@ import com.jayway.jsonpath.JsonPath;
 import jp.co.axa.apidemo.entities.Employee;
 import jp.co.axa.apidemo.entities.User;
 import jp.co.axa.apidemo.helpers.AuthRequest;
-import jp.co.axa.apidemo.helpers.AuthResponse;
 import jp.co.axa.apidemo.helpers.EmployeeRequest;
 import jp.co.axa.apidemo.helpers.EmployeeResponse;
 import jp.co.axa.apidemo.repositories.EmployeeRepository;
 import jp.co.axa.apidemo.repositories.UserRepository;
-import jp.co.axa.apidemo.services.EmployeeService;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +30,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
-import java.util.HashMap;
+
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

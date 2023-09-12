@@ -7,22 +7,10 @@ import jp.co.axa.apidemo.repositories.UserRepository;
 import jp.co.axa.apidemo.services.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
+
 @SpringBootTest
 public class UserServiceTest {
 
@@ -34,6 +22,7 @@ public class UserServiceTest {
     @Test
     @DisplayName(value = "User Should Find By Email")
     void  userShouldFindByEmail() {
+        userRepository.deleteAll();
         User expectedUser = new User();
         expectedUser.setEmail("tariqul@gmail.com");
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
