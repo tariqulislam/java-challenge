@@ -1,6 +1,5 @@
 package jp.co.axa.apidemo.helpers;
 
-import io.swagger.models.auth.In;
 import jp.co.axa.apidemo.entities.Employee;
 /*
 Using for handling the Employee Response Entity for employee controller
