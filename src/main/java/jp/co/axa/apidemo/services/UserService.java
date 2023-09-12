@@ -12,8 +12,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-
-
     public boolean findUserByEmail(String email) {
         User user = userRepository.findByEmail(email).orElse(null);
         return user != null;

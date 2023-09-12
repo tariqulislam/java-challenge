@@ -8,23 +8,31 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+/*
+* Employee Related Business logic for repository
+* Cached Repository form service
+* Handle all repository logic
+ */
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    /* Method for return the list of employee and cached the employees into employee list cached
+    * Hash based Native Cached applied*/
     @Cacheable(value = "employee-list")
     public List<Employee> retrieveEmployees() {
        System.out.println("employee list action is calling.... ");
        return  employeeRepository.findAll();
     }
 
+    /* Hash based Native Cached applied
+    * Method for return single employee and cached with employee id */
     @Cacheable(value = "employee-info" , key = "#id")
     public Employee getEmployee(Long id) {
         System.out.println("employee find action is calling.... ");
@@ -33,6 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     }
 
+    /* Service for Saved the employee into database
+    * Remove all employee list cached and add new the cached employee info and employee list for Hashed native cache by
+    */
     @CachePut(value = "employee-info", key = "#employee.id")
     @CacheEvict(value = "employee-list", allEntries = true)
     public Employee saveEmployee(Employee employee){
@@ -40,7 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         return employeeRepository.save(employee);
     }
 
-
+   /* Service for delete the employee from database  and evict all the cached employee */
    @Caching(evict = {
            @CacheEvict(value = "employee-info", key = "#id"),
            @CacheEvict(value = "employee-list", allEntries = true)
@@ -57,6 +68,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     }
 
+    /* Service for update the employee information
+    Update the cached employee by id during update and evict the all employee list cache*/
     @Caching(evict = {
             @CacheEvict(value = "employee-info", key = "#employee.id"),
             @CacheEvict(value = "employee-list", allEntries = true)
