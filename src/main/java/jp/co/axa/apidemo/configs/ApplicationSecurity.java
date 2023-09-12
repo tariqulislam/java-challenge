@@ -42,18 +42,23 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        // Frame option disable for H2 Console and iFrame issue
         http.headers().frameOptions().disable();
+        // Create the stateless session for rest api access
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+        /* Control the permission for resource and because of spring security revoke the access Swagger UI  and Api Docs
+        related Swagger.We need to authenticate to get token to access so, this part provide access to auth related
+        api endpoint to directly access without access token to auth api */
         http.authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/swagger-ui**",  "/webjars/**", "/resources/**",  "/swagger-resources/**",
                         "/swagger-ui.html",
                         "/v2/api-docs",
                 "/h2-console/**").permitAll()
-
                 .anyRequest().authenticated();
 
+        /* Exception handling if some access to protected page and unwanted request to server */
         http.exceptionHandling()
                 .authenticationEntryPoint(((httpServletRequest, httpServletResponse, e) -> {
                     httpServletResponse.sendError(
@@ -61,6 +66,8 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
                             e.getMessage()
                     );
                 }));
+        /* Add the filter with jwt token and User authentication it will add the
+         filter before client request to server to access any api endpoint */
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
